@@ -1,57 +1,39 @@
 ML_SGU_project
 ==============================
 
-du an machine learning
-
 Project Organization
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── README.md              <- Giới thiệu tổng quan về dự án, cung cấp hướng dẫn cho các nhà phát triển hoặc người dùng muốn sử dụng dự án này.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   ├── processed          <- Bộ dữ liệu đã được xử lý
+    │   ├── raw                <- Bộ dữ liệu thô
+    │   └── external           <- Các dữ liệu khác     
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── models                 <- Thư mục chứa ô hình đã được huấn luyện
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks
+    │   ├── exploratory        <- Notebook EDA
+    │   └── results            <- Trực quan hóa kết quả 
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    ├── reports                <- Thư mục chứa các báo cáo dạng HTML, PDF, LaTeX,...
+    │   └── figures            <-  Chứa các hình ảnh sử dụng trong các báo cáo.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── requirements.txt       <- Tập tin chứa danh sách các gói Python cần thiết để tái tạo môi trường phân tích của dự án
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
+    ├── src                    <- Source code của dự án.
+    │    ├── __init__.py       <- File giúp biến thư mục thành một module Python
+    │    ├── config.py         <- Lưu trưc biến, tham số mô hình
+    │    ├── data              <- Tải xuống hoặc tạo dữ liệu
+    │    │
+    │    ├── data_engineering 
+    │    │
+    │    └──  models            <- Thư mục con chứa mã nguồn liên quan đến mô hình
+    │         ├── predict_model
+    │         └── train_model
+    │                └── logs   <- Nhật ký thí nghiệm
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
-
---------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+    ├── api/                    <- Thư mục chứa mã nguồn cho API  
+    

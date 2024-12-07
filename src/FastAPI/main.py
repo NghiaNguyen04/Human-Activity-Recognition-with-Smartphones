@@ -52,6 +52,7 @@ import joblib
 import os
 import numpy as np
 import subprocess
+from tensorflow.keras.models import load_model as load_model_keras
 
 
 app = FastAPI()
@@ -68,6 +69,7 @@ class Operation(str, Enum):
     logisticRegression = "Logistic Regression Model"
     SVM = "Support Vector Classifier Model"
     randomForest = "Random Forest Model"
+    LSTM = "Long Short-Term Memory Model"
 
 
 # Hàm xử lý chuỗi đầu vào
@@ -79,6 +81,13 @@ def preprocess_input(input_str: str):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid input data: {input_str}. Error: {e}")
 
+def preprocess_input_LSTM(input_str: str)-> np.ndarray:
+    elements = input_str.split()  # Tách chuỗi theo khoảng trắng/tab
+    try:
+        features = [float(e) for e in elements]  # Chuyển sang số thực
+        return np.array(features)  # Chuyển đổi thành mảng 2D
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=f"Invalid input data: {input_str}. Error: {e}")
 
 # Tìm và tải model
 def load_model(model_paths):
@@ -87,6 +96,14 @@ def load_model(model_paths):
             print(f"Found model at: {os.path.abspath(path)}")
             with open(path, "rb") as f:
                 return joblib.load(f)
+    # Nếu không tìm thấy bất kỳ đường dẫn nào
+    raise HTTPException(status_code=404, detail="model not found.")
+
+def load_model_LSTM(model_paths):
+    for path in model_paths:
+        if os.path.exists(path):
+            print(f"Found model at: {os.path.abspath(path)}")
+            return load_model_keras(path)
     # Nếu không tìm thấy bất kỳ đường dẫn nào
     raise HTTPException(status_code=404, detail="model not found.")
 
@@ -132,6 +149,20 @@ def RandomForestPredict(x):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
+def LSTMPredict(x):
+    model_paths = [
+        "models/model_Exp2_LSTM_number_Units_128.h5",
+        "../../models/model_Exp2_LSTM_number_Units_128.h5"
+    ]
+    model = load_model_LSTM(model_paths)
+    try:
+        output = model.predict(x)
+        index_of_max = np.argmax(output, axis=-1)
+        predictions = index_of_max[0, 0]
+        return predictions.tolist()  # Chuyển đổi numpy array thành danh sách
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
+
 # Endpoint chính
 @app.post("/Predicting human activity using sensors/")
 def calculate(operation: Operation, input_data: str):
@@ -143,21 +174,30 @@ def calculate(operation: Operation, input_data: str):
             result = SVMPredict(processed_input)
         elif operation == Operation.randomForest:
             result = RandomForestPredict(processed_input)
+        elif operation == Operation.LSTM:
+            processed_input_LSTM = preprocess_input_LSTM(input_data)
+            processed_input_LSTM = np.expand_dims(processed_input_LSTM, axis=0)  # Thêm chiều cho batch_size (1 mẫu)
+            processed_input_LSTM = np.expand_dims(processed_input_LSTM, axis=1)  # Thêm chiều cho features (số đặc trưng)
+            result = LSTMPredict(processed_input_LSTM)
         else:
             raise HTTPException(status_code=400, detail="Unsupported operation.")
 
         activity = "none"
-        if result[0] == 1:
+        if isinstance(result, (list, np.ndarray)):
+            result = result[0]
+            activity = "none"
+
+        if result == 1:
             activity = "Sitting"
-        elif result[0] == 2:
+        elif result == 2:
             activity = "Standing"
-        elif result[0] == 3:
+        elif result == 3:
             activity = "Walking"
-        elif result[0] == 4:
+        elif result == 4:
             activity = "WALKING_DOWNSTAIRS"
-        elif result[0] == 5:
+        elif result == 5:
             activity = "WALKING_UPSTAIRS"
-        elif result[0] == 0:
+        elif result == 0:
             activity = "LAYING"
 
         return {"operation": operation.value, "result": result, "activity": activity}

@@ -133,7 +133,7 @@ def RandomForestPredict(x):
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
 # Endpoint chính
-@app.post("/calculate/")
+@app.post("/Predicting human activity using sensors/")
 def calculate(operation: Operation, input_data: str):
     try:
         processed_input = preprocess_input(input_data)

@@ -213,3 +213,4 @@ if __name__ == "__main__":
         print("Ứng dụng đã được dừng lại!")
     except subprocess.CalledProcessError as e:
         print(f"Đã xảy ra lỗi khi chạy ứng dụng: {e}")
+#%%

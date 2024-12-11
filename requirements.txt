@@ -1,0 +1,5 @@
+fastapi==0.115.6
+joblib==1.4.2
+numpy==2.2.0
+setuptools==75.1.0
+tensorflow==2.10.0

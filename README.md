@@ -1,6 +1,8 @@
 # Machine Learning Project 🤖💫
 Human Activity Recognition with Smartphones (Nhận diện hoạt động của con người bằng điện thoại thông minh)
 
+📍 https://github.com/NghiaNguyen04/HAR-project-SGU.git
+
 
 📑 Project Organization
 -----------------------
@@ -36,8 +38,7 @@ Human Activity Recognition with Smartphones (Nhận diện hoạt động của 
     ├── api/                    <- Thư mục chứa mã nguồn cho API  
 
 
---------
-Dữ liệu test API (dữ liệu này được lấy ngẫu nhiên từ tập test, không dùng trong việc training)
+## 📌 Kết quả độ chính xác của các mô hình học máy khác nhau trên tập dữ liệu thường
 
 | Mô hình                     | Accuracy trên tập dữ liệu thường |
 |-----------------------------|----------------------------------|

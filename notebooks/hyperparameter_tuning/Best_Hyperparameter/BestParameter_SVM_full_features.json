@@ -1,0 +1,7 @@
+{
+    "C": 16,
+    "kernel": "rbf",
+    "degree": 3,
+    "gamma": 0.01,
+    "coef0": 0
+}

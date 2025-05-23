@@ -1,0 +1,6 @@
+{
+    "bootstrap": false,
+    "max_depth": 30,
+    "min_samples_leaf": 5,
+    "min_samples_split": 2
+}

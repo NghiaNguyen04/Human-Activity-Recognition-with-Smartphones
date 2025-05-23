@@ -1,4 +1,4 @@
-# Machine Learning Project 🤖💫
+# Machine Learning - Data Mining Project 🤖💫
 Human Activity Recognition with Smartphones (Nhận diện hoạt động của con người bằng điện thoại thông minh)
 
 📍 https://github.com/NghiaNguyen04/HAR-project-SGU.git
@@ -8,7 +8,7 @@ Human Activity Recognition with Smartphones (Nhận diện hoạt động của 
 -----------------------
 
     ├── LICENSE
-    ├── README.md              <- Giới thiệu tổng quan về dự án, cung cấp hướng dẫn cho các nhà phát triển hoặc người dùng muốn sử dụng dự án này.
+    ├── README.md              <- Giới thiệu tổng quan về dự án, cung cấp hướng dẫn sử dụng.
     ├── data
     │   ├── processed          <- Bộ dữ liệu đã được xử lý
     │   ├── raw                <- Bộ dữ liệu thô

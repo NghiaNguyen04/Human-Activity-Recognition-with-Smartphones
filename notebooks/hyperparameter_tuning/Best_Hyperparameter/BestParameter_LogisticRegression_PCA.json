@@ -1,0 +1,6 @@
+{
+    "C": 10,
+    "max_iter": 3000,
+    "penalty": "l2",
+    "solver": "saga"
+}

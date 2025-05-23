@@ -1,0 +1,7 @@
+{
+    "C": 1,
+    "kernel": "linear",
+    "degree": 3,
+    "gamma": "scale",
+    "coef0": 0
+}
